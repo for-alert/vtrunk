@@ -15,21 +15,16 @@
                 </v-flex>
             </v-form>
         </div>
-        <div>
-            <v-layout row wrap>
-                <v-flex xs12 sm6 offset-sm3>
-                    <v-card v-for="store in stores" hover @click="OnDialog(store.name,store.address,store.id)">
-                        <div>
-                            <p>店名 : {{store.name}}</p>
-                            <p>住所 : {{store.address}}</p>
-                        </div>
-                    </v-card>
-                    <v-card>
-                        <p v-show="!stores.length">店舗が見つかりませんでした。</p>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </div>
+        <stores v-if="!selectedStoreFlag" @add-store="OnDialog" :stores="stores"></stores>
+        <v-layout row wrap>
+            <v-flex xs12 sm6 offset-sm3>
+                <v-card>
+                    <p v-show="!stores.length && !firstFlag">店舗が見つかりませんでした。</p>
+                </v-card>
+            </v-flex>
+        </v-layout>
+        <send-store v-if="selectedStoreFlag" @send-store="OnAddStore" :store="selectedStore"
+                    :firstFlag="false"></send-store>
         <v-dialog
                 v-model="dialog"
                 max-width="1000"
@@ -118,11 +113,12 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import Store from '@/api/protcol/store/Store';
-import StoreVue from '@/components/AddStore/Store';
 import {ApiClient} from '@/api/ApiClient';
 import CheckLogin from '@/CheckLogin';
+import Stores from '@/components/AddStore/Stores';
+import SendStore from '@/components/AddStore/SendStore.vue';
 
-@Component({components: {StoreVue}})
+@Component({components: {SendStore, Stores}})
 export default class AddStore extends Vue {
     private stores: Store[] = [];
     private searchStore = '';
@@ -134,6 +130,9 @@ export default class AddStore extends Vue {
     private exp = 0;
     private getExp = false;
     private openLevelUp = false;
+    private selectedStoreFlag = false;
+    private selectedStore: Store | null = null;
+    private firstFlag = true;
 
     private created() {
         CheckLogin(this);
@@ -141,15 +140,18 @@ export default class AddStore extends Vue {
 
     private async OnButtonClick() {
         if (this.searchStore) {
+            this.firstFlag = false;
             this.stores = await new ApiClient().FindStoreName(this.searchStore);
         }
     }
 
-    private OnDialog(name: string, access: string, id: number) {
-        this.name = name;
-        this.address = access;
-        this.id = id;
-        this.dialog = true;
+    private OnDialog(name: string, address: string, id: number) {
+        // this.name = name;
+        // this.address = access;
+        // this.id = id;
+        // this.dialog = true;
+        this.selectedStore = {name, address, id};
+        this.selectedStoreFlag = true;
     }
 
     private OnLevelUp() {
