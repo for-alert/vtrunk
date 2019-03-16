@@ -10,20 +10,20 @@
 </template>
 
 <script lang="ts">
-import User from '@/api/protcol/user/PublicUser.ts';
-import {Component, Vue} from 'vue-property-decorator';
-import {ApiClient} from '@/api/ApiClient';
+    import {PublicUser} from '@/api/protcol/user/PublicUser.ts';
+    import {Component, Vue} from 'vue-property-decorator';
+    import {ApiClient} from '@/api/ApiClient';
 
-@Component
-export default class Ranking extends Vue {
-    private users: User[] = [];
-    private rank = 0;
+    @Component
+    export default class Ranking extends Vue {
+        private users: PublicUser[] = [];
+        private rank = 0;
 
-    private async created() {
-        // ここにさーばから取得したデータ入れる。
-        this.users = await new ApiClient().GetPublicUsers();
+        private async created() {
+            // ここにさーばから取得したデータ入れる。
+            this.users = await new ApiClient().GetPublicUsers();
+        }
     }
-}
 </script>
 
 <style scoped>

@@ -1,8 +1,15 @@
 <template>
     <div class="unlogin">
-        <button @click="OnLogin">ログイン</button>
-        <br><br>
-        <button @click="OnRegister">ユーザ登録</button>
+        <div>
+            <img src="../../public/oicks.png">
+        </div>
+        <div>
+            <button @click="OnLogin">ログイン</button>
+        </div>
+        <br>
+        <div>
+            <button @click="OnRegister">ユーザ登録</button>
+        </div>
     </div>
 </template>
 
