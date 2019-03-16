@@ -1,11 +1,16 @@
 <template>
     <div>　　
         <h1>ランキング</h1>
-        <div v-for="(user,index) in users">
-            <div class="card-body">
-                <p class="user-info">{{index+1}}位 : ユーザ名：{{user.userName}}　level：{{user.level}}</p>
+        <v-card class="card">
+            <div v-for="(user,index) in users">
+                <v-card-title class="card-title">
+                    <p>{{index+1}}位 : ユーザ名：{{user.userName}}</p>
+                </v-card-title>
+                <v-card-text class="card-text">
+                    <p>　level：{{user.level}}</p>
+                </v-card-text>
             </div>
-        </div>
+        </v-card>
     </div>
 </template>
 

@@ -19,30 +19,30 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import Store from '@/api/protcol/store/Store';
-import StoreVue from '@/components/AddStore/Store';
-import {ApiClient} from '@/api/ApiClient';
+    import {Component, Vue} from 'vue-property-decorator';
+    import Store from '@/api/protcol/store/Store';
+    import StoreVue from '@/components/AddStore/Store';
+    import {ApiClient} from '@/api/ApiClient';
 
-@Component({components: {StoreVue}})
-export default class AddStore extends Vue {
-    private stores: Store[] = [];
-    private searchStore = '';
+    @Component({components: {StoreVue}})
+    export default class AddStore extends Vue {
+        private stores: Store[] = [];
+        private searchStore = '';
 
-    private async OnButtonClick() {
-        this.stores = await new ApiClient().FindStoreName(this.searchStore);
-    }
+        private async OnButtonClick() {
+            this.stores = await new ApiClient().FindStoreName(this.searchStore);
+        }
 
-    private async OnAddStore(id: number) {
-        const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'));
-        this.stores = [];
-        if (result.levelUp) {
-            alert(`レベルが上がりました`);
-        } else {
-            alert(`経験値を${result.getExp}取得しました`);
+        private async OnAddStore(id: number) {
+            const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'));
+            this.stores = [];
+            if (result.levelUp) {
+                alert(`レベルが上がりました`);
+            } else {
+                alert(`経験値を${result.getExp}取得しました`);
+            }
         }
     }
-}
 </script>
 
 <style scoped>
