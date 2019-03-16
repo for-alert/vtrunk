@@ -4,8 +4,10 @@ import {PublicUser} from '@/api/protcol/user/PublicUser';
 import {PrivateUser} from '@/api/protcol/user/PrivateUser';
 import {CreateUser} from '@/api/protcol/user/CreateUser';
 import {AddStoreResult} from '@/api/protcol/store/AddStoreResult';
+
+import {GetStore, Store} from '@/api/protcol/store/Store';
+
 import {RandomBattle} from '@/api/protcol/battle/RandomBattle';
-import {Store} from '@/api/protcol/store/Store';
 
 export class ApiClient {
     private serverUrl: string;
@@ -56,6 +58,11 @@ export class ApiClient {
 
     public async AddStore(id: string, token: string, file: string, message: string): Promise<AddStoreResult> {
         const res = await this.client.post('/add_store', {id, token, file, message});
+        return res.data;
+    }
+
+    public async GetStores(): Promise<GetStore[]> {
+        const res = await this.client.get('/stores');
         return res.data;
     }
 

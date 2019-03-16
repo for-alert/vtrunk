@@ -12,6 +12,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
                     <h3>誕生日 : {{user.birthday}}</h3>
                     <h3>レベル : {{user.level}}</h3>
                     <h3>現在の経験値 : {{user.exp}}</h3>
+                    <h3>win/lose : {{user.win}}/{{user.lose}}</h3>
                     <h3>次のレベルアップまでの経験値 : {{user.nextExp}}</h3>
                 </v-card-text>
             </v-card>
