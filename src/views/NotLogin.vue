@@ -1,7 +1,7 @@
 <template>
     <div class="unlogin">
         <div>
-            <img src="../../public/oicks.png">
+            <img src="../../public/title.png">
         </div>
         <div>
             <button @click="OnLogin">ログイン</button>

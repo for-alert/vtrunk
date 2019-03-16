@@ -8,6 +8,18 @@
                 <button @click="OnButtonClick">検索</button>
             </div>
         </div>
+        <v-layout row wrap>
+            <v-flex xs12 sm6 offset-sm3>
+                <v-card>
+                    <v-card-title>
+                        <div v-for="store in stores">
+                            <span>{{store.name}}</span><br>
+                            <span>{{store.address}}</span>
+                        </div>
+                    </v-card-title>
+                </v-card>
+            </v-flex>
+        </v-layout>
 
         <div>
             <div v-for="store in stores">
