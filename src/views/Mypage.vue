@@ -10,17 +10,18 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+    import {Component, Vue} from 'vue-property-decorator';
 
-@Component
-export default class User extends Vue {
-    private userName = 'hoge';
-    private sex = 'ネカマ';
-    private birthday = '9999/99/99';
-    private  level = 1;
-    private exp = 0;
+    @Component
+    export default class User extends Vue {
+        private userId = 4274;
+        private userName = 'hoge';
+        private sex = 'ネカマ';
+        private birthday = '9999/99/99';
+        private level = 1;
+        private exp = 0;
 
-}
+    }
 </script>
 
 <style scoped>
