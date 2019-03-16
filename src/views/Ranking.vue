@@ -27,10 +27,10 @@
         private async created() {
             this.users = await new ApiClient().GetPublicUsers();
             this.users.sort((a, b) => {
-                if (a.level > b.level) {
+                if (Number(a.level) > Number(b.level)) {
                     return -1;
                 }
-                if (a.level < b.level) {
+                if (Number(a.level) < Number(b.level)) {
                     return 1;
                 }
                 return 0;
