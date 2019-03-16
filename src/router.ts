@@ -8,6 +8,7 @@ import TestPage from '@/views/TestPage.vue';
 import Register from '@/views/Register.vue';
 import Login from '@/views/Login.vue';
 import NotLogin from '@/views/NotLogin.vue';
+import Battle from '@/views/Battle.vue';
 
 Vue.use(Router);
 
@@ -52,6 +53,11 @@ export default new Router({
             path: '/notlogin',
             name: 'notlogin',
             component: NotLogin,
+        },
+        {
+            path: '/battle',
+            name: 'battle',
+            component: Battle,
         },
     ],
 });
