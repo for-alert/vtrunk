@@ -8,24 +8,31 @@
             <router-link to="/register">ユーザ登録</router-link>
             |
             <router-link to="/login" v-show="!logined">ログイン</router-link>
-            <a @click="Logout" v-show="logined">ログアウト</a>
+            <button @click="Logout" v-show="logined">ログアウト</button>
         </div>
         <router-view/>
     </div>
 </template>
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import {ApiClient} from '@/api/ApiClient';
 
 @Component
 export default class App extends Vue {
-    private logined = true;
+    private logined = false;
+
+    private async created() {
+        if (this.$cookies.get('user_token')) {
+            this.logined = !!(await new ApiClient().GetPublicUserByToken(this.$cookies.get('user_token')));
+        }
+    }
 
     private Logout() {
         this.logined = false;
+        this.$cookies.remove('user_token');
         alert('ログアウトしました');
         this.$router.push('/login');
         window.location.reload();
-
     }
 }
 </script>
