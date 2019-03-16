@@ -11,14 +11,13 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import Store from '@/api/protcol/store/Store';
-import {ApiClient} from '@/api/ApiClient';
 
 @Component({
     props: {
         store: Object,
     },
 })
-export default class AddStore extends Vue {
+export default class StoreVue extends Vue {
     private store!: Store;
 
     public OnButtonClick() {

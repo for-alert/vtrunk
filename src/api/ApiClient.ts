@@ -52,8 +52,8 @@ export class ApiClient {
         return res.data;
     }
 
-    public async AddStore(id: string, token: string): Promise<AddStoreResult> {
-        const res = await this.client.post('/add_store', {id, token});
+    public async AddStore(id: string, token: string, file: string, message: string): Promise<AddStoreResult> {
+        const res = await this.client.post('/add_store', {id, token, file, message});
         return res.data;
     }
 }

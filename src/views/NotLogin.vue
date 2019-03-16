@@ -1,5 +1,5 @@
 <template>
-    <div class="unlogin">
+    <div id="unlogin">
         <div>
             <img src="../../public/title.png">
         </div>
@@ -25,7 +25,6 @@
 
 <style lang="scss">
     #unlogin {
-        display: table-cell;
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
