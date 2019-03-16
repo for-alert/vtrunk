@@ -45,6 +45,7 @@ export default class Register extends Vue {
             const token = await new ApiClient().LoginUser(this.password, this.userName);
             this.$cookies.set('user_token', token);
             this.$router.push('/mypage');
+            window.location.reload();
         } catch (e) {
             this.message = 'ユーザ名またはパスワードが間違っています。';
         }
