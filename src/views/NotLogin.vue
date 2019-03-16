@@ -3,13 +3,8 @@
         <div>
             <img src="../../public/title.png">
         </div>
-        <div>
-            <button @click="OnLogin">ログイン</button>
-        </div>
-        <br>
-        <div>
-            <button @click="OnRegister">ユーザ登録</button>
-        </div>
+        <v-btn color="primary" @click="OnLogin">ログイン</v-btn>
+        <v-btn color="primary" @click="OnRegister">ユーザ登録</v-btn>
     </div>
 </template>
 

@@ -3,12 +3,9 @@
         <h1>ログイン</h1>
         <form action>
             <v-flex xs12 sm6 offset-sm3>
-                <div class="form-group">
-                    <v-text-field v-model="userName" label="ユーザー名"></v-text-field>
-                </div>
-                <div class="form-group">
-                    <v-text-field v-model="password" label="パスワード"></v-text-field>
-                </div>
+                <v-text-field v-model="userName" label="ユーザー名"></v-text-field>
+                <v-text-field type="password" v-model="password" label="パスワード"></v-text-field>
+                <v-alert color="error" icon="warning" outline v-show="message">{{message}}</v-alert>
             </v-flex>
             <v-btn type="submit" color="primary" @click="OnClickLogin">ログイン</v-btn>
             <v-btn type="button" color="primary" @click="OnRegister">ユーザ登録</v-btn>

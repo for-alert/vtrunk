@@ -4,48 +4,20 @@ import {UserSex} from "../api/protcol/user/UserSex";
     <div>
         <h1>ユーザ登録</h1>
         <form action class="box">
-            <div class="form-group">
-                <label for="userName">ユーザ名</label>
-                <div class="col-sm-10">
-                    <input id="userName" class="form-control" type="text" v-model="userName" required/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="sex">性別</label>
-                <div id="sex" class="form-control">
-                    <select name="sex" v-model="sex">
-                        <option value="man">男</option>
-                        <option value="woman">女</option>
-                        <option value="private">非公開</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="birthday">誕生日</label>
-                <div class="col-sm-10">
-                    <input id="birthday" class="form-control" type="text" v-model="birthday" required/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password">パスワード</label>
-                <div class="col-sm-10">
-                    <input id="password" class="form-control" type="password" v-model="password" required/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password">パスワード再入力</label>
-                <div class="col-sm-10">
-                    <input id="re_password" class="form-control" type="password" v-model="rePassword" required/>
-                </div>
-            </div>
-            <p class="alert alert-danger" v-show="message">{{message}}</p><br>
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary" @click="OnClick_register">登録</button>
-            </div>
-            <br>
-            <div class="col-sm-10">
-                <button type="button" class="btn btn-primary" @click="OnLogin">ログイン</button>
-            </div>
+            <v-flex xs12 sm6 offset-sm3>
+                <v-text-field v-model="userName" label="ユーザ名"></v-text-field>
+                <v-select
+                        v-model="sex"
+                        :items="['男', '女', '非公開']"
+                        :item-value="['men', 'women', 'private']"
+                        label="性別"></v-select>
+                <v-text-field v-model="birthday" label="誕生日"></v-text-field>
+                <v-text-field type="password" v-model="password" label="パスワード"></v-text-field>
+                <v-text-field type="password" v-model="rePassword" label="パスワード再入力"></v-text-field>
+                <v-alert color="error" icon="warning" outline v-show="message">{{message}}</v-alert>
+            </v-flex>
+            <v-btn color="primary" @click="OnClick_register">登録</v-btn>
+            <v-btn color="primary" @click="OnLogin">ログイン</v-btn>
         </form>
     </div>
 </template>
@@ -58,7 +30,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
     @Component
     export default class Register extends Vue {
         private userName = '';
-        private sex: UserSex = UserSex.Private;
+        private sex: UserSex | null = null;
         private birthday = '';
         private password = '';
         private rePassword = '';
@@ -75,7 +47,9 @@ import {UserSex} from "../api/protcol/user/UserSex";
             }
             if (!this.sex) {
                 this.message = '性別が選択されていません。';
+                return;
             }
+
             if (!this.birthday) {
                 this.message = '誕生日が入力されていません。';
                 return;
@@ -100,8 +74,6 @@ import {UserSex} from "../api/protcol/user/UserSex";
             } catch (e) {
                 alert(e);
             }
-
-
         }
     }
 </script>
