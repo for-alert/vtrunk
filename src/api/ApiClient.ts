@@ -1,6 +1,7 @@
 import * as Axios from 'axios';
 import {AxiosInstance} from 'axios';
 import {User} from '@/api/protcol/User';
+import {PrivateUser} from '@/api/protcol/PrivateUser';
 
 export class ApiClient {
     private serverUrl: string;
@@ -19,8 +20,13 @@ export class ApiClient {
         });
     }
 
-    public async get_public_users(): Promise<User[]> {
+    public async GetPublicUsers(): Promise<User[]> {
         const req = await this.client.get('/public_users');
         return req.data;
+    }
+
+    public async GetPrivateUser(token: string): Promise<PrivateUser> {
+        const res = await this.client.post('private_user', {token});
+        return res.data;
     }
 }

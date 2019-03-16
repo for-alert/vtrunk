@@ -26,7 +26,7 @@ export default class Mypage extends Vue {
     };
 
     private async created() {
-        this.user = (await new ApiClient().get_public_users()).pop();
+        this.user = (await new ApiClient().GetPublicUsers()).pop();
     }
 
 }

@@ -21,7 +21,7 @@ export default class Ranking extends Vue {
 
     private async created() {
         // ここにさーばから取得したデータ入れる。
-        this.users = await new ApiClient().get_public_users();
+        this.users = await new ApiClient().GetPublicUsers();
     }
 }
 </script>
