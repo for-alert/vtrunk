@@ -8,6 +8,7 @@
                     <v-toolbar-items class="hidden-sm-and-down">
                         <v-btn to="/mypage">マイページ</v-btn>
                         <v-btn to="/ranking">ランキング</v-btn>
+                        <v-btn to="/stores">タイムライン</v-btn>
                         <v-btn @click="Logout" v-show="logined">ログアウト</v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
