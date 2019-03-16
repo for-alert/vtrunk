@@ -1,17 +1,34 @@
 <template>
     <div id="app">
         <div id="nav">
-            <router-link to="/mypage">マイページ</router-link>
+            <router-link to="/">マイページ</router-link>
             |
             <router-link to="/ranking">ランキング</router-link>
             |
-            <router-link to="/addstore">店舗追加</router-link>
-            |
             <router-link to="/register">ユーザ登録</router-link>
+            |
+            <router-link to="/login" v-show="!logined">ログイン</router-link>
+            <a @click="Logout" v-show="logined">ログアウト</a>
         </div>
         <router-view/>
     </div>
 </template>
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator';
+
+@Component
+export default class App extends Vue {
+    private logined = true;
+
+    private Logout() {
+        this.logined = false;
+        alert('ログアウトしました');
+        this.$router.push('/login');
+        window.location.reload();
+
+    }
+}
+</script>
 
 <style lang="scss">
     #app {
