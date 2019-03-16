@@ -14,7 +14,7 @@ import {BattleState} from "./BattleState";
                             <h2>{{myUser.level}}</h2>
                         </v-card-text>
                         <v-card-text v-if="state === 'last_wait'">
-                            <h2>{{Cut(1 - battleResult.fix)}}</h2>
+                            <h2>{{Cut(battleResult.fix)}}</h2>
                         </v-card-text>
                     </v-card>
                 </v-flex>
@@ -31,7 +31,7 @@ import {BattleState} from "./BattleState";
                             <h2>{{battleResult.battleUser.level}}</h2>
                         </v-card-text>
                         <v-card-text v-if="state === 'last_wait'">
-                            <h2>{{Cut(battleResult.fix)}}</h2>
+                            <h2>{{Cut(1 - battleResult.fix)}}</h2>
                         </v-card-text>
                     </v-card>
                 </v-flex>
@@ -42,7 +42,7 @@ import {BattleState} from "./BattleState";
                 </v-flex>
             </v-layout>
         </v-container>
-        <v-dialog max-width="350" v-model="dialog">
+        <v-dialog max-width="350" v-model="Dialog">
             <v-card>
                 <v-card-text>
                     <p>{{message}}</p>
@@ -99,8 +99,20 @@ export default class Battle extends Vue {
     private dialog: boolean = false;
     private message: string = '';
 
+    public get Dialog() {
+        return this.dialog;
+    }
+
+    public set Dialog(v: boolean) {
+        if (!v) {
+            this.OnClose();
+        }
+
+        this.dialog = v;
+    }
+
     private async created() {
-        const WAIT_COUNT_DOWN_TIME = 3000;
+        const WAIT_COUNT_DOWN_TIME = 2000;
         const token = this.$cookies.get('user_token');
         if (token) {
             const api = new ApiClient();
@@ -131,7 +143,7 @@ export default class Battle extends Vue {
 
 
     private LastWait() {
-        const START_COUNT_DOWN_TIME = 500;
+        const START_COUNT_DOWN_TIME = 1000;
         const my = this;
         this.countDown = START_COUNT_DOWN_TIME;
         this.timer = setInterval(() => {
@@ -145,7 +157,6 @@ export default class Battle extends Vue {
                 this.message += this.battleResult.levelUp.levelUp ? '\nレベルUP!!' : '';
             }
 
-            this.moveNumber++;
             this.countDown--;
         }, 1);
     }

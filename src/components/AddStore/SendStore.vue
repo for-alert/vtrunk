@@ -15,6 +15,7 @@
                 >
                     送信
                 </v-btn>
+                <image src=""
             </v-flex>
         </v-card-actions>
         <v-dialog
@@ -149,7 +150,6 @@
 
             };
             fr.readAsDataURL(file);
-
         }
 
         private OnExp() {
