@@ -17,6 +17,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
 import {Component, Vue} from 'vue-property-decorator';
 import {PublicUser} from '@/api/protcol/user/PublicUser.ts';
 import {ApiClient} from '@/api/ApiClient';
+import CheckLogin from '@/CheckLogin';
 
 @Component
 export default class Mypage extends Vue {
@@ -30,6 +31,7 @@ export default class Mypage extends Vue {
     };
 
     private async created() {
+        await CheckLogin(this);
         this.user = (await new ApiClient().GetPublicUserByToken(this.$cookies.get('user_token')));
     }
 

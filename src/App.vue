@@ -16,29 +16,33 @@
     </div>
 </template>
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
-    import {ApiClient} from '@/api/ApiClient';
+import {Component, Vue} from 'vue-property-decorator';
+import {ApiClient} from '@/api/ApiClient';
 
-    @Component
-    export default class App extends Vue {
-        private logined = false;
+@Component
+export default class App extends Vue {
+    private logined = false;
 
-        private async created() {
-            if (this.$cookies.get('user_token')) {
-                this.logined = !!(await new ApiClient().GetPublicUserByToken(this.$cookies.get('user_token')));
-            } else {
+    private async created() {
+        if (this.$cookies.get('user_token')) {
+            this.logined = !!(await new ApiClient().GetPublicUserByToken(this.$cookies.get('user_token')));
+            if (this.logined === false) {
                 this.$router.push('/notlogin');
             }
-        }
 
-        private Logout() {
-            this.logined = false;
-            this.$cookies.remove('user_token');
-            alert('ログアウトしました');
-            this.$router.push('/login');
-            window.location.reload();
+        } else {
+            this.$router.push('/notlogin');
         }
     }
+
+    private Logout() {
+        this.logined = false;
+        this.$cookies.remove('user_token');
+        alert('ログアウトしました');
+        this.$router.push('/notlogin');
+        window.location.reload();
+    }
+}
 </script>
 
 <style lang="scss">

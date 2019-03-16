@@ -116,54 +116,59 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
-    import Store from '@/api/protcol/store/Store';
-    import StoreVue from '@/components/AddStore/Store';
-    import {ApiClient} from '@/api/ApiClient';
+import {Component, Vue} from 'vue-property-decorator';
+import Store from '@/api/protcol/store/Store';
+import StoreVue from '@/components/AddStore/Store';
+import {ApiClient} from '@/api/ApiClient';
+import CheckLogin from '@/CheckLogin';
 
-    @Component({components: {StoreVue}})
-    export default class AddStore extends Vue {
-        private stores: Store[] = [];
-        private searchStore = '';
-        private dialog = false;
-        private name = '';
-        private address = '';
-        private id = 0;
-        private levelUp = false;
-        private exp = 0;
-        private getExp = false;
-        private openLevelUp = false;
+@Component({components: {StoreVue}})
+export default class AddStore extends Vue {
+    private stores: Store[] = [];
+    private searchStore = '';
+    private dialog = false;
+    private name = '';
+    private address = '';
+    private id = 0;
+    private levelUp = false;
+    private exp = 0;
+    private getExp = false;
+    private openLevelUp = false;
 
-        private async OnButtonClick() {
-            if (this.searchStore) {
-                this.stores = await new ApiClient().FindStoreName(this.searchStore);
-            }
-        }
+    private created() {
+        CheckLogin(this);
+    }
 
-        private OnDialog(name: string, access: string, id: number) {
-            this.name = name;
-            this.address = access;
-            this.id = id;
-            this.dialog = true;
-        }
-
-        private OnLevelUp() {
-            this.getExp = false;
-            if (this.levelUp) {
-                this.openLevelUp = true;
-            }
-        }
-
-        private async OnAddStore(id: number) {
-            const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'), 'yeay', 'oicくそ');
-            this.stores = [];
-            this.dialog = false;
-            this.levelUp = result.levelUp;
-            this.exp = result.getExp;
-            this.getExp = true;
-
+    private async OnButtonClick() {
+        if (this.searchStore) {
+            this.stores = await new ApiClient().FindStoreName(this.searchStore);
         }
     }
+
+    private OnDialog(name: string, access: string, id: number) {
+        this.name = name;
+        this.address = access;
+        this.id = id;
+        this.dialog = true;
+    }
+
+    private OnLevelUp() {
+        this.getExp = false;
+        if (this.levelUp) {
+            this.openLevelUp = true;
+        }
+    }
+
+    private async OnAddStore(id: number) {
+        const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'), 'yeay', 'oicくそ');
+        this.stores = [];
+        this.dialog = false;
+        this.levelUp = result.levelUp;
+        this.exp = result.getExp;
+        this.getExp = true;
+
+    }
+}
 </script>
 
 <style scoped>
