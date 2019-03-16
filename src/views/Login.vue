@@ -41,7 +41,14 @@ export default class Register extends Vue {
             this.message = 'パスワードが入力されていません。';
             return;
         }
-        this.$router.push('/mypage');
+        try {
+            const token = await new ApiClient().LoginUser(this.password, this.userName);
+            this.$cookies.set('user_token', token);
+            this.$router.push('/mypage');
+        } catch (e) {
+            this.message = 'ユーザ名またはパスワードが間違っています。';
+        }
+
 
     }
 }
