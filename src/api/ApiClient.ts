@@ -47,7 +47,7 @@ export class ApiClient {
     }
 
     public async FindStoreName(name: string) {
-        const res = await this.client.get('/find_store_name' + name);
+        const res = await this.client.get('/find_store_name/', {params: {name}});
         return res.data;
     }
 }
