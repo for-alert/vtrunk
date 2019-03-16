@@ -17,6 +17,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
                 </v-card-text>
             </v-card>
             <v-btn to="/addstore">店舗登録</v-btn>
+            <v-btn to="/battle">ランダムバトル</v-btn>
         </v-flex>
     </div>
 </template>
