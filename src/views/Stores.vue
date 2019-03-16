@@ -2,6 +2,7 @@
     <div>
         <div v-for="store in stores">
             <store :store="store" :user="users.find(u=>u.userId==store.userId)"/>
+            <br>
         </div>
 
     </div>
