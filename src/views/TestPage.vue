@@ -19,7 +19,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
             //     pass: "abcdefg1234",
             //     birthday: "1980-01-01"
             // }));
-            // console.log(await api.LoginUser("abcdefg1234", "hoge_san"));
+            // console.log(await api.LoginUser('abcdefg1234', 'hoge_san'));
         }
     }
 </script>

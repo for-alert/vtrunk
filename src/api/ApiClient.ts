@@ -26,6 +26,11 @@ export class ApiClient {
         return res.data;
     }
 
+    public async GetPublicUserByToken(token: string): Promise<PublicUser> {
+        const res = await this.client.post('/public_user_from_token', {token});
+        return res.data;
+    }
+
     public async GetPrivateUser(token: string): Promise<PrivateUser> {
         const res = await this.client.post('/private_user', {token});
         return res.data;
@@ -38,6 +43,11 @@ export class ApiClient {
 
     public async LoginUser(pass: string, userName: string): Promise<string> {
         const res = await this.client.post('/login_user', {pass, user_name: userName});
+        return res.data;
+    }
+
+    public async FindStoreName(name: string) {
+        const res = await this.client.get('/find_store_name' + name);
         return res.data;
     }
 }
