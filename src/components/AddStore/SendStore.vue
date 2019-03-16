@@ -9,12 +9,13 @@
         <h3>写真</h3>
         <input type="file" ref="pictureInput"/>
         <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                    @click="OnButtonClick"
-            >
-                送信
-            </v-btn>
+            <v-flex xs12 sm6 offset-sm3>
+                <v-btn
+                        @click="OnButtonClick"
+                >
+                    送信
+                </v-btn>
+            </v-flex>
         </v-card-actions>
         <v-dialog
                 v-model="dialog"
