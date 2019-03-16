@@ -5,7 +5,7 @@
             <v-flex xs12 sm6 offset-sm3>
                 <v-card class="card">
                     <div class="card-body">
-                        <p>{{index+1}}位 : ユーザ名：{{user.userName}}</p>
+                        <p>{{index+1}}位 : {{user.userName}}様</p>
                         <p>level：{{user.level}}</p>
                     </div>
                 </v-card>
@@ -25,8 +25,19 @@
         private rank = 0;
 
         private async created() {
-            // ここにさーばから取得したデータ入れる。
             this.users = await new ApiClient().GetPublicUsers();
+            this.users.sort((a, b) => {
+                if (a.level > b.level) {
+                    return -1;
+                }
+                if (a.level < b.level) {
+                    return 1;
+                }
+                return 0;
+            });
+            if (this.users.length > 30) {
+                this.users.splice(30, this.users.length - 30);
+            }
         }
     }
 </script>

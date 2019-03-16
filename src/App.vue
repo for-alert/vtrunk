@@ -6,10 +6,7 @@
                 |
                 <router-link to="/ranking">ランキング</router-link>
                 |
-                <router-link to="/register">ユーザ登録</router-link>
-                |
-                <router-link to="/login" v-show="!logined">ログイン</router-link>
-                <button @click="Logout" v-show="logined">ログアウト</button>
+                <v-btn @click="Logout" v-show="logined">ログアウト</v-btn>
             </div>
             <router-view/>
         </v-app>
@@ -26,6 +23,10 @@
         private async created() {
             if (this.$cookies.get('user_token')) {
                 this.logined = !!(await new ApiClient().GetPublicUserByToken(this.$cookies.get('user_token')));
+                if (this.logined === false) {
+                    this.$router.push('/notlogin');
+                }
+
             } else {
                 this.$router.push('/notlogin');
             }
@@ -35,7 +36,7 @@
             this.logined = false;
             this.$cookies.remove('user_token');
             alert('ログアウトしました');
-            this.$router.push('/login');
+            this.$router.push('/NotLogin');
             window.location.reload();
         }
     }
