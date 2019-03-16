@@ -20,7 +20,9 @@ import {UserSex} from "../api/protcol/user/UserSex";
             //     birthday: "1980-01-01"
             // }));
             // console.log(await api.LoginUser('abcdefg1234', 'hoge_san'));
+            // const token = await api.LoginUser('abcdefg1234', 'hoge_san');
             // console.log(await api.FindStoreName('マクドナルド'));
+            // console.log(await api.AddStore("e837193", token));
         }
     }
 </script>

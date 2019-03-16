@@ -50,4 +50,9 @@ export class ApiClient {
         const res = await this.client.get('/find_store_name/', {params: {name}});
         return res.data;
     }
+
+    public async AddStore(id: string, token: string): Promise<void> {
+        const res = await this.client.post('/add_store', {id, token});
+        return res.data;
+    }
 }

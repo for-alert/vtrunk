@@ -6,6 +6,9 @@
         <p>誕生日 : {{user.birthday}}</p>
         <p>レベル : {{user.level}}</p>
         <p>経験値 : {{user.exp}}</p>
+        <br>
+        <router-link to="/addstore">店舗登録</router-link>
+
     </div>
 </template>
 
