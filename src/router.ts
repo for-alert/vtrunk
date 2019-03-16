@@ -6,6 +6,7 @@ import AddStore from '@/views/AddStore.vue';
 import TestPage from '@/views/TestPage.vue';
 import Register from '@/views/Register.vue';
 import Login from '@/views/Login.vue';
+import NotLogin from '@/views/NotLogin.vue';
 
 Vue.use(Router);
 
@@ -45,6 +46,11 @@ export default new Router({
             path: '/test',
             name: 'testpage',
             component: TestPage,
+        },
+        {
+            path: '/notlogin',
+            name: 'notlogin',
+            component: NotLogin,
         },
     ],
 });

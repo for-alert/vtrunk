@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div id="nav">
+        <div id="nav" v-show="logined">
             <router-link to="/">マイページ</router-link>
             |
             <router-link to="/ranking">ランキング</router-link>
@@ -12,6 +12,7 @@
         </div>
         <router-view/>
     </div>
+
 </template>
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
@@ -24,7 +25,7 @@ export default class App extends Vue {
     private async created() {
         if (this.$cookies.get('user_token')) {
             this.logined = !!(await new ApiClient().GetPublicUserByToken(this.$cookies.get('user_token')));
-        }
+        } else { this.$router.push('/notlogin'); }
     }
 
     private Logout() {
