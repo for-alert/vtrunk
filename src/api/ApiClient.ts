@@ -4,6 +4,8 @@ import {PublicUser} from '@/api/protcol/user/PublicUser';
 import {PrivateUser} from '@/api/protcol/user/PrivateUser';
 import {CreateUser} from '@/api/protcol/user/CreateUser';
 import {AddStoreResult} from '@/api/protcol/store/AddStoreResult';
+import {RandomBattle} from '@/api/protcol/battle/RandomBattle';
+import {Store} from '@/api/protcol/store/Store';
 
 export class ApiClient {
     private serverUrl: string;
@@ -47,13 +49,18 @@ export class ApiClient {
         return res.data;
     }
 
-    public async FindStoreName(name: string) {
+    public async FindStoreName(name: string): Promise<Store> {
         const res = await this.client.get('/find_store_name/', {params: {name}});
         return res.data;
     }
 
     public async AddStore(id: string, token: string, file: string, message: string): Promise<AddStoreResult> {
         const res = await this.client.post('/add_store', {id, token, file, message});
+        return res.data;
+    }
+
+    public async RandomBattle(token: string): Promise<RandomBattle> {
+        const res = await this.client.post('/random_battle', {token});
         return res.data;
     }
 }
