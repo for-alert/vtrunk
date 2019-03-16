@@ -1,3 +1,4 @@
+import {UserSex} from "../api/protcol/user/UserSex";
 <template>
     <div>
         <h1>マイページ</h1>
@@ -14,15 +15,15 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import User from '@/api/protcol/user/PublicUser.ts';
+import {PublicUser} from '@/api/protcol/user/PublicUser.ts';
 import {ApiClient} from '@/api/ApiClient';
 
 @Component
 export default class Mypage extends Vue {
-    private user: User = {
+    private user: PublicUser = {
         userId: 0,
         userName: '',
-        sex: '',
+        sex: '' as any,
         birthday: '',
         level: 0,
         exp: 0,
