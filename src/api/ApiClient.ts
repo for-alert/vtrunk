@@ -35,4 +35,9 @@ export class ApiClient {
         const res = await this.client.post('/register_user', user);
         return res.data;
     }
+
+    public async LoginUser(pass: string, userName: string): Promise<string> {
+        const res = await this.client.post('/login_user', {pass, user_name: userName});
+        return res.data;
+    }
 }
