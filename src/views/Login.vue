@@ -1,27 +1,17 @@
 <template>
     <div>
         <h1>ログイン</h1>
-        <form action class="box">
-            <div class="form-group">
-                <label for="userName">ユーザ名</label>
-                <div class="col-sm-10">
-                    <input id="userName" class="form-control" type="text" v-model="userName" required/>
+        <form action>
+            <v-flex xs12 sm6 offset-sm3>
+                <div class="form-group">
+                    <v-text-field v-model="userName" label="ユーザー名"></v-text-field>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="password">パスワード</label>
-                <div class="col-sm-10">
-                    <input id="password" class="form-control" type="password" v-model="password" required/>
+                <div class="form-group">
+                    <v-text-field v-model="password" label="パスワード"></v-text-field>
                 </div>
-            </div>
-            <p class="alert alert-danger" v-show="message">{{message}}</p><br>
-            <div class="col-sm-10">
-                <v-btn type="submit" class="btn btn-primary" @click="OnClickLogin">ログイン</v-btn>
-            </div>
-            <br>
-            <div class="col-sm-10">
-                <button type="button" class="btn btn-primary" @click="OnRegister">ユーザ登録</button>
-            </div>
+            </v-flex>
+            <v-btn type="submit" color="primary" @click="OnClickLogin">ログイン</v-btn>
+            <v-btn type="button" color="primary" @click="OnRegister">ユーザ登録</v-btn>
         </form>
     </div>
 </template>
