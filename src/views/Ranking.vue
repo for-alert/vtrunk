@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import User from '@/api/protcol/User.ts';
+import User from '@/api/protcol/user/PublicUser.ts';
 import {Component, Vue} from 'vue-property-decorator';
 import {ApiClient} from '@/api/ApiClient';
 

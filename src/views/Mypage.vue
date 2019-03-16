@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import User from '@/api/protcol/User.ts';
+import User from '@/api/protcol/user/PublicUser.ts';
 import {ApiClient} from '@/api/ApiClient';
 
 @Component

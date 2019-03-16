@@ -1,7 +1,8 @@
 import * as Axios from 'axios';
 import {AxiosInstance} from 'axios';
-import {User} from '@/api/protcol/User';
-import {PrivateUser} from '@/api/protcol/PrivateUser';
+import {PublicUser} from '@/api/protcol/user/PublicUser';
+import {PrivateUser} from '@/api/protcol/user/PrivateUser';
+import {CreateUser} from '@/api/protcol/user/CreateUser';
 
 export class ApiClient {
     private serverUrl: string;
@@ -20,13 +21,18 @@ export class ApiClient {
         });
     }
 
-    public async GetPublicUsers(): Promise<User[]> {
-        const req = await this.client.get('/public_users');
-        return req.data;
+    public async GetPublicUsers(): Promise<PublicUser[]> {
+        const res = await this.client.get('/public_users');
+        return res.data;
     }
 
     public async GetPrivateUser(token: string): Promise<PrivateUser> {
-        const res = await this.client.post('private_user', {token});
+        const res = await this.client.post('/private_user', {token});
+        return res.data;
+    }
+
+    public async CreateUser(user: CreateUser): Promise<string> {
+        const res = await this.client.post('/register_user', user);
         return res.data;
     }
 }
