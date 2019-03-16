@@ -62,6 +62,52 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        <v-dialog
+                v-model="getExp"
+                max-width="500"
+        >
+            <v-card>
+                <v-card-text>
+                    <div>
+                        経験値を{{exp}}取得しました。
+                    </div>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                            color="green darken-1"
+                            flat="flat"
+                            @click="OnLevelUp()"
+                    >
+                        OK
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-dialog
+                v-model="openLevelUp"
+                max-width="500"
+        >
+            <v-card>
+                <v-card-text>
+                    <div>
+                        レベルUP!!
+                    </div>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                            color="green darken-1"
+                            flat="flat"
+                            @click="openLevelUp = false"
+                    >
+                        OK
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 
 </template>
@@ -80,6 +126,10 @@ export default class AddStore extends Vue {
     private name = '';
     private address = '';
     private id = 0;
+    private levelUp = false;
+    private exp = 0;
+    private getExp = false;
+    private openLevelUp = false;
 
     private async OnButtonClick() {
         this.stores = await new ApiClient().FindStoreName(this.searchStore);
@@ -92,15 +142,21 @@ export default class AddStore extends Vue {
         this.dialog = true;
     }
 
-    private async OnAddStore(id: number) {
-        const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'));
-        this.stores = [];
-        if (result.levelUp) {
-            alert(`レベルが上がりました`);
-        } else {
-            alert(`経験値を${result.getExp}取得しました`);
+    private OnLevelUp() {
+        this.getExp = false;
+        if (this.levelUp) {
+            this.openLevelUp = true;
         }
+    }
+
+    private async OnAddStore(id: number) {
+        const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'), 'yeay', 'oicくそ');
+        this.stores = [];
         this.dialog = false;
+        this.levelUp = result.levelUp;
+        this.exp = result.getExp;
+        this.getExp = true;
+
     }
 }
 </script>
