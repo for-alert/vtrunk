@@ -33,8 +33,14 @@ export default class AddStore extends Vue {
         this.stores = await new ApiClient().FindStoreName(this.searchStore);
     }
 
-    private OnAddStore(id: number) {
-        alert(id);
+    private async OnAddStore(id: number) {
+        const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'));
+        this.stores = [];
+        if (result.levelUp) {
+            alert(`レベルが上がりました`);
+        } else {
+            alert(`経験値を${result.getExp}取得しました`);
+        }
     }
 }
 </script>

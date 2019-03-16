@@ -3,6 +3,7 @@ import {AxiosInstance} from 'axios';
 import {PublicUser} from '@/api/protcol/user/PublicUser';
 import {PrivateUser} from '@/api/protcol/user/PrivateUser';
 import {CreateUser} from '@/api/protcol/user/CreateUser';
+import {AddStoreResult} from '@/api/protcol/store/AddStoreResult';
 
 export class ApiClient {
     private serverUrl: string;
@@ -51,7 +52,7 @@ export class ApiClient {
         return res.data;
     }
 
-    public async AddStore(id: string, token: string): Promise<void> {
+    public async AddStore(id: string, token: string): Promise<AddStoreResult> {
         const res = await this.client.post('/add_store', {id, token});
         return res.data;
     }
