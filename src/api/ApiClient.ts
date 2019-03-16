@@ -70,4 +70,14 @@ export class ApiClient {
         const res = await this.client.post('/random_battle', {token});
         return res.data;
     }
+
+    public async Favo(token: string, storeId: number) {
+        const res = await this.client.post('/favo', {token, storeId});
+        return res.data;
+    }
+
+    public async FavoCnt(storeId: number) {
+        const res = await this.client.get('/store_of_favo', {params: {storeId}});
+        return res.data;
+    }
 }
