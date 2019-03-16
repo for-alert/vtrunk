@@ -2,15 +2,15 @@
     <div>
         <h2>{{store.name}}</h2>
         <h2>{{store.address}}</h2>
-        <h3>メッセージ</h3>
-        <v-textarea v-model="message"></v-textarea>
+
+        <v-flex xs12 sm6 offset-sm3>
+            <v-textarea box v-model="message" label="メッセージ"></v-textarea>
+        </v-flex>
         <h3>写真</h3>
         <input type="file" ref="pictureInput"/>
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                    color="green darken-1"
-                    flat="flat"
                     @click="OnButtonClick"
             >
                 送信
