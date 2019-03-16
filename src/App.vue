@@ -6,6 +6,8 @@
             <router-link to="/ranking">ランキング</router-link>
             |
             <router-link to="/addstore">店舗追加</router-link>
+            |
+            <router-link to="/register">ユーザ登録</router-link>
         </div>
         <router-view/>
     </div>

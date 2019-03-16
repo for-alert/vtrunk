@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Mypage from '@/views/Mypage.vue';
 import Ranking from '@/views/Ranking.vue';
 import AddStore from '@/views/AddStore.vue';
+import Register from '@/views/Register.vue';
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
             path: '/addstore',
             name: 'addstore',
             component: AddStore,
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register,
         },
     ],
 });
