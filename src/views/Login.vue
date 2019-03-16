@@ -16,7 +16,7 @@
             </div>
             <p class="alert alert-danger" v-show="message">{{message}}</p><br>
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary" @click="OnClickLogin">ログイン</button>
+                <v-btn type="submit" class="btn btn-primary" @click="OnClickLogin">ログイン</v-btn>
             </div>
             <br>
             <div class="col-sm-10">
