@@ -10,7 +10,6 @@ import Login from '@/views/Login.vue';
 import NotLogin from '@/views/NotLogin.vue';
 
 Vue.use(Router);
-Vue.use(Vuetify);
 
 export default new Router({
     routes: [
