@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Mypage from '@/views/Mypage.vue';
 import Ranking from '@/views/Ranking.vue';
+import AddStore from '@/views/AddStore.vue';
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ export default new Router({
             path: '/ranking',
             name: 'ranking',
             component: Ranking,
+        },
+        {
+            path: '/addstore',
+            name: 'addstore',
+            component: AddStore,
         },
     ],
 });

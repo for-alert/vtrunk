@@ -4,6 +4,8 @@
             <router-link to="/mypage">マイページ</router-link>
             |
             <router-link to="/ranking">ランキング</router-link>
+            |
+            <router-link to="/addstore">店舗追加</router-link>
         </div>
         <router-view/>
     </div>

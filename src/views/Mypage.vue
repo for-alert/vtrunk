@@ -1,27 +1,35 @@
 <template>
     <div>
         <h1>マイページ</h1>
-        <p>ユーザ名 : {{userName}}</p>
-        <p>性別 : {{sex}}</p>
-        <p>誕生日 : {{birthday}}</p>
-        <p>レベル : {{level}}</p>
-        <p>経験値 : {{exp}}</p>
+        <p>ユーザ名 : {{user.userName}}</p>
+        <p>性別 : {{user.sex}}</p>
+        <p>誕生日 : {{user.birthday}}</p>
+        <p>レベル : {{user.level}}</p>
+        <p>経験値 : {{user.exp}}</p>
     </div>
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
+import User from '@/api/protcol/User.ts';
+import {ApiClient} from '@/api/ApiClient';
 
-    @Component
-    export default class User extends Vue {
-        private userId = 4274;
-        private userName = 'hoge';
-        private sex = 'ネカマ';
-        private birthday = '9999/99/99';
-        private level = 1;
-        private exp = 0;
+@Component
+export default class Mypage extends Vue {
+    private user: User = {
+        userId: 0,
+        userName: '',
+        sex: '',
+        birthday: '',
+        level: 0,
+        exp: 0,
+    };
 
+    private async created() {
+        this.user = (await new ApiClient().get_public_users()).pop();
     }
+
+}
 </script>
 
 <style scoped>
