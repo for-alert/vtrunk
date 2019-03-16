@@ -5,6 +5,7 @@ import Ranking from '@/views/Ranking.vue';
 import AddStore from '@/views/AddStore.vue';
 import TestPage from '@/views/TestPage.vue';
 import Register from '@/views/Register.vue';
+import Login from '@/views/Login.vue';
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
             path: '/register',
             name: 'register',
             component: Register,
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
         },
         {
             path: '/test',
