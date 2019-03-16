@@ -5,6 +5,7 @@ export interface PublicUser {
     userName: string;
     sex: UserSex;
     birthday: string;
+    nextExp: number;
     level: number;
     exp: number;
 }

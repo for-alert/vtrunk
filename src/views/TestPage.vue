@@ -19,8 +19,9 @@ import {UserSex} from "../api/protcol/user/UserSex";
             //     pass: "abcdefg1234",
             //     birthday: "1980-01-01"
             // }));
-            // console.log(await api.LoginUser('abcdefg1234', 'hoge_san'));
+            // console.log(await api.LoginUser('1234567890', 'hiroki'));
             // const token = await api.LoginUser('1234567890', 'hiroki');
+            // console.log(await api.GetPublicUserByToken(token));
             // console.log(await api.FindStoreName('マクドナルド'));
             // console.log(await api.AddStore("e837193", token));
             // console.log(await api.RandomBattle(token));
