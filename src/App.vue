@@ -2,11 +2,15 @@
     <div id="app">
         <v-app>
             <div id="nav" v-show="logined">
-                <router-link to="/">マイページ</router-link>
-                |
-                <router-link to="/ranking">ランキング</router-link>
-                |
-                <v-btn @click="Logout" v-show="logined">ログアウト</v-btn>
+                <v-toolbar>
+                    <img src="../public/title.png" width="457" height="71">
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items class="hidden-sm-and-down">
+                        <v-btn to="/mypage">マイページ</v-btn>
+                        <v-btn to="/ranking">ランキング</v-btn>
+                        <v-btn @click="Logout" v-show="logined">ログアウト</v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
             </div>
             <router-view/>
         </v-app>

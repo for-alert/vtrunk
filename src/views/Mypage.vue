@@ -11,7 +11,8 @@ import {UserSex} from "../api/protcol/user/UserSex";
                     <h3>性別 : {{user.sex}}</h3>
                     <h3>誕生日 : {{user.birthday}}</h3>
                     <h3>レベル : {{user.level}}</h3>
-                    <h3>経験値 : {{user.exp}}</h3>
+                    <h3>現在の経験値 : {{user.exp}}</h3>
+                    <h3>次のレベルアップまでの経験値 : {{user.nextExp}}</h3>
                 </v-card-text>
             </v-card>
             <v-btn to="/addstore">店舗登録</v-btn>
@@ -35,6 +36,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
             birthday: '',
             level: 0,
             exp: 0,
+            nextExp: 0,
         };
 
         private async created() {
