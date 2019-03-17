@@ -16,7 +16,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
                         v-model="year"
                         :items="years"
                         :item-value="years"
-                        label="誕生日 年"></v-select>
+                        label="誕生日　年"></v-select>
                 <v-select
                         v-model="month"
                         :items="monthes"
@@ -123,6 +123,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
                 });
                 this.$cookies.set('user_token', token);
                 this.$router.push('/mypage');
+                window.location.reload();
             } catch (e) {
                 alert(e);
             }
