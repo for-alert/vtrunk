@@ -37,7 +37,7 @@
 
 <style scoped>
     #map {
-        width: 500px;
         height: 500px;
+        margin-bottom: 20px;
     }
 </style>

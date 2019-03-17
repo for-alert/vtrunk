@@ -15,7 +15,7 @@
                 </v-flex>
             </v-form>
         </div>
-        <v-flex xs12 sm6 offset-sm4>
+        <v-flex xs12 sm6 offset-sm3>
             <map-view v-if="stores.length!=0&& location" :stores="stores" :pos="location"></map-view>
         </v-flex>
         <stores v-if="!selectedStoreFlag" @add-store="OnDialog" :stores="stores"></stores>
