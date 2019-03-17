@@ -42,7 +42,7 @@
 
         private async OnClick() {
             this.iineFlag = true;
-            new ApiClient().Favo(this.$cookies.get('user_token'), this.store.$id);
+            await new ApiClient().Favo(this.$cookies.get('user_token'), this.store.$id);
             this.favoCnt = await new ApiClient().FavoCnt(this.store.$id);
 
         }
