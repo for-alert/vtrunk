@@ -7,9 +7,9 @@ import {UserSex} from "../api/protcol/user/UserSex";
                 <v-card-title>
                     <h2 class="justify-center">ユーザ名 : {{user.userName}}</h2>
                 </v-card-title>
-                <v-card-mediac>
+                <v-card-media>
                     <img src="../../public/chara.png">
-                </v-card-mediac>
+                </v-card-media>
                 <v-card-text>
                     <h3>性別 : {{user.sex}}</h3>
                     <h3>誕生日 : {{user.birthday}}</h3>
