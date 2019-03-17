@@ -1,7 +1,5 @@
 import {UserSex} from "../api/protcol/user/UserSex";
 import {BattleState} from "./BattleState";
-import {BattleState} from "./BattleState";
-import {BattleState} from "./BattleState";
 <template>
     <div id="battle">
         <v-container grid-list-md text-md-center>
@@ -46,9 +44,15 @@ import {BattleState} from "./BattleState";
             <v-card>
                 <v-card-text>
                     <p>{{message}}</p>
+                    <p>{{lvmessage}}</p>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn @click="OnClose">OK</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="OnClose"
+                           color="green darken-1"
+                           flat="flat">
+                        OK
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -77,7 +81,10 @@ import {BattleState} from "./BattleState";
         private battleResult: RandomBattle = {
             win: false,
             fix: 0,
-            levelUp: null,
+            levelUp: {
+                getExp: 0,
+                levelUp: false,
+            },
             battleUser: {
                 userId: 0,
                 userName: '',
@@ -98,6 +105,7 @@ import {BattleState} from "./BattleState";
 
         private dialog: boolean = false;
         private message: string = '';
+        private lvmessage = '';
 
         public get Dialog() {
             return this.dialog;
@@ -153,7 +161,9 @@ import {BattleState} from "./BattleState";
                     this.message = this.battleResult.levelUp ?
                         '経験値を' + this.battleResult.levelUp.getExp + '取得しました。' :
                         '敗北しました。';
-                    this.message += this.battleResult.levelUp.levelUp ? '\nレベルUP!!' : '';
+                    if (this.battleResult.levelUp) {
+                        this.lvmessage = this.battleResult.levelUp.levelUp ? '\nレベルUP!!' : '';
+                    }
                 }
 
                 this.countDown--;
