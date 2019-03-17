@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify';
 import Router from 'vue-router';
 import Mypage from '@/views/Mypage.vue';
 import Ranking from '@/views/Ranking.vue';
@@ -10,6 +9,7 @@ import Login from '@/views/Login.vue';
 import NotLogin from '@/views/NotLogin.vue';
 import Battle from '@/views/Battle.vue';
 import Stores from '@/views/Stores.vue';
+import MapView from '@/views/MapView.vue';
 
 Vue.use(Router);
 
@@ -55,7 +55,11 @@ export default new Router({
             name: 'notlogin',
             component: NotLogin,
         },
-
+        {
+            path: '/map',
+            name: 'map',
+            component: MapView,
+        },
         {
             path: '/stores',
             name: 'stores',

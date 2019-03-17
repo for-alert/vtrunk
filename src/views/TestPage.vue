@@ -1,32 +1,21 @@
-import {UserSex} from "../api/protcol/user/UserSex";
 <template>
-
+    <div id="map">
+    </div>
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
-    import {ApiClient} from '@/api/ApiClient';
-    import {UserSex} from '@/api/protcol/user/UserSex';
+import {Component, Vue} from 'vue-property-decorator';
+import 'bingmaps';
 
-    @Component
-    export default class TestPage extends Vue {
-        public async created() {
-            const api = new ApiClient();
-            // console.log(await api.GetPrivateUser('hoge'));
-            // console.log(await api.CreateUser({
-            //     user_name: "hoge_san",
-            //     sex: UserSex.Men,
-            //     pass: "abcdefg1234",
-            //     birthday: "1980-01-01"
-            // }));
-            // console.log(await api.LoginUser('1234567890', 'hiroki'));
-            // const token = await api.LoginUser('1234567890', 'hiroki');
-            // console.log(await api.GetPublicUserByToken(token));
-            // console.log(await api.FindStoreName('マクドナルド'));
-            // console.log(await api.AddStore("e837193", token));
-            // console.log(await api.RandomBattle(token));
-        }
+@Component
+export default class TestPage extends Vue {
+    public mounted() {
+        const map = new Microsoft.Maps.Map('#map', {
+            credentials: 'AizjfRpuOsvfOpcPlLzrQtMrdxBxXi8xlbJUrfMv8ibleQ4pAhrQtZLIMwX3iLVj',
+            center: new Microsoft.Maps.Location(),
+        });
     }
+}
 </script>
 
 <style scoped>
