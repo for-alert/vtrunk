@@ -25,9 +25,10 @@ export default class MapView extends Vue {
             const map = new Microsoft.Maps.Map('#map', {
                 credentials: 'AizjfRpuOsvfOpcPlLzrQtMrdxBxXi8xlbJUrfMv8ibleQ4pAhrQtZLIMwX3iLVj',
                 center: pos,
+                zoom: 10,
             });
             map.entities.push(this.stores.map((d) => {
-                return new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(d.latitude, d.longitude));
+                return new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(d.latitude, d.longitude), {color: 'red'});
             }));
         }
     }
