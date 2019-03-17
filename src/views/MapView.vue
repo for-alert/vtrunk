@@ -4,11 +4,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-    import 'bingmaps';
-    import {Store} from '@/api/protcol/store/Store';
+import {Component, Vue, Watch} from 'vue-property-decorator';
+import 'bingmaps';
+import {Store} from '@/api/protcol/store/Store';
 
-    @Component({
+@Component({
     props: {
         stores: Array,
         pos: Array,
@@ -30,9 +30,32 @@ export default class MapView extends Vue {
                 credentials: 'AizjfRpuOsvfOpcPlLzrQtMrdxBxXi8xlbJUrfMv8ibleQ4pAhrQtZLIMwX3iLVj',
                 center: pos,
             });
+            this.map.entities.clear();
             this.map.entities.push(this.stores.map((d) => {
                 return new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(d.latitude, d.longitude), {color: 'red'});
             }));
+        }
+    }
+    @Watch('stores', {deep: true})
+    public OnStores(stores: Store[]) {
+        const pos = new Microsoft.Maps.Location(this.pos[0].coords.latitude, this.pos[0].coords.longitude);
+        if (this.map) {
+            this.map.dispose();
+        }
+        this.map = new Microsoft.Maps.Map('#map', {
+            credentials: 'AizjfRpuOsvfOpcPlLzrQtMrdxBxXi8xlbJUrfMv8ibleQ4pAhrQtZLIMwX3iLVj',
+            center: pos,
+        });
+        this.map.entities.clear();
+        this.map.entities.push(stores.map((d) => {
+            return new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(d.latitude, d.longitude), {color: 'red'});
+        }));
+
+    }
+
+    public destroyed() {
+        if (this.map) {
+            this.map.dispose();
         }
     }
 }
