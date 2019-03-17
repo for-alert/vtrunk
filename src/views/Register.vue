@@ -123,6 +123,7 @@ import {UserSex} from "../api/protcol/user/UserSex";
                 });
                 this.$cookies.set('user_token', token);
                 this.$router.push('/mypage');
+                window.location.reload();
             } catch (e) {
                 alert(e);
             }
