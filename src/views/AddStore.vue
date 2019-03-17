@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>店舗追加</h1>
+        <h1>店舗検索</h1>
         <div>
             <v-form>
                 <v-flex xs12 sm6 offset-sm3>
@@ -31,66 +31,66 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import Store from '@/api/protcol/store/Store';
-import {ApiClient} from '@/api/ApiClient';
-import CheckLogin from '@/CheckLogin';
-import Stores from '@/components/AddStore/Stores';
-import SendStore from '@/components/AddStore/SendStore.vue';
+    import {Component, Vue} from 'vue-property-decorator';
+    import Store from '@/api/protcol/store/Store';
+    import {ApiClient} from '@/api/ApiClient';
+    import CheckLogin from '@/CheckLogin';
+    import Stores from '@/components/AddStore/Stores';
+    import SendStore from '@/components/AddStore/SendStore.vue';
 
-@Component({components: {SendStore, Stores}})
-export default class AddStore extends Vue {
-    private stores: Store[] = [];
-    private searchStore = '';
-    private dialog = false;
-    private name = '';
-    private address = '';
-    private id = 0;
-    private levelUp = false;
-    private exp = 0;
-    private getExp = false;
-    private openLevelUp = false;
-    private selectedStoreFlag = false;
-    private selectedStore: Store | null = null;
-    private firstFlag = true;
+    @Component({components: {SendStore, Stores}})
+    export default class AddStore extends Vue {
+        private stores: Store[] = [];
+        private searchStore = '';
+        private dialog = false;
+        private name = '';
+        private address = '';
+        private id = 0;
+        private levelUp = false;
+        private exp = 0;
+        private getExp = false;
+        private openLevelUp = false;
+        private selectedStoreFlag = false;
+        private selectedStore: Store | null = null;
+        private firstFlag = true;
 
-    private created() {
-        CheckLogin(this);
-    }
+        private created() {
+            CheckLogin(this);
+        }
 
-    private async OnButtonClick() {
-        if (this.searchStore) {
-            this.firstFlag = false;
-            this.stores = await new ApiClient().FindStoreName(this.searchStore);
+        private async OnButtonClick() {
+            if (this.searchStore) {
+                this.firstFlag = false;
+                this.stores = await new ApiClient().FindStoreName(this.searchStore);
+            }
+        }
+
+        private OnDialog(name: string, address: string, id: number) {
+            // this.name = name;
+            // this.address = access;
+            // this.id = id;
+            // this.dialog = true;
+            this.selectedStore = {name, address, id};
+            this.selectedStoreFlag = true;
+        }
+
+        private OnLevelUp() {
+            this.getExp = false;
+            if (this.levelUp) {
+                this.openLevelUp = true;
+            }
+        }
+
+        private async OnAddStore(id: number) {
+            const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'), 'yeay', 'oicくそ');
+            this.stores = [];
+            this.dialog = false;
+            this.levelUp = result.levelUp;
+            this.exp = result.getExp;
+            this.getExp = true;
+
         }
     }
-
-    private OnDialog(name: string, address: string, id: number) {
-        // this.name = name;
-        // this.address = access;
-        // this.id = id;
-        // this.dialog = true;
-        this.selectedStore = {name, address, id};
-        this.selectedStoreFlag = true;
-    }
-
-    private OnLevelUp() {
-        this.getExp = false;
-        if (this.levelUp) {
-            this.openLevelUp = true;
-        }
-    }
-
-    private async OnAddStore(id: number) {
-        const result = await new ApiClient().AddStore(String(id), this.$cookies.get('user_token'), 'yeay', 'oicくそ');
-        this.stores = [];
-        this.dialog = false;
-        this.levelUp = result.levelUp;
-        this.exp = result.getExp;
-        this.getExp = true;
-
-    }
-}
 </script>
 
 <style scoped>

@@ -5,6 +5,7 @@ export interface Store {
 }
 
 export interface GetStore {
+    $id: number;
     id: number;
     storeName: string;
     address: string;
