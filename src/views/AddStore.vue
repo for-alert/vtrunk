@@ -15,6 +15,7 @@
                 </v-flex>
             </v-form>
         </div>
+        <map-view v-if="stores && location" :stores="stores" :pos="location"></map-view>
         <stores v-if="!selectedStoreFlag" @add-store="OnDialog" :stores="stores"></stores>
         <v-layout row wrap>
             <v-flex xs12 sm6 offset-sm3>
@@ -37,8 +38,9 @@
     import CheckLogin from '@/CheckLogin';
     import Stores from '@/components/AddStore/Stores';
     import SendStore from '@/components/AddStore/SendStore.vue';
+    import MapView from '@/views/MapView.vue';
 
-    @Component({components: {SendStore, Stores}})
+    @Component({components: {MapView, SendStore, Stores}})
     export default class AddStore extends Vue {
         private stores: Store[] = [];
         private searchStore = '';
@@ -53,6 +55,7 @@
         private selectedStoreFlag = false;
         private selectedStore: Store | null = null;
         private firstFlag = true;
+        private location: any[] | null = null;
 
         private created() {
             CheckLogin(this);
@@ -61,7 +64,11 @@
         private async OnButtonClick() {
             if (this.searchStore) {
                 this.firstFlag = false;
-                this.stores = await new ApiClient().FindStoreName(this.searchStore);
+                navigator.geolocation.getCurrentPosition(async (p) => {
+                    this.location = [p];
+                    this.stores =
+                        await new ApiClient().FindStoreName(this.searchStore, p.coords.latitude, p.coords.longitude);
+                });
             }
         }
 
