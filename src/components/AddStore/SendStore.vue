@@ -11,11 +11,16 @@
         <v-card-actions>
             <v-flex xs12 sm6 offset-sm3>
                 <v-btn
+                        @click="OnBack"
+                >
+                    戻る
+                </v-btn>
+                <v-btn
                         @click="OnButtonClick"
                 >
                     送信
                 </v-btn>
-                <image src=""
+
             </v-flex>
         </v-card-actions>
         <v-dialog
@@ -103,66 +108,70 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
-    import Store from '@/api/protcol/store/Store';
-    import SendStoreVue from '@/components/AddStore/SendStore';
-    import {ApiClient} from '@/api/ApiClient';
+import {Component, Vue} from 'vue-property-decorator';
+import Store from '@/api/protcol/store/Store';
+import SendStoreVue from '@/components/AddStore/SendStore';
+import {ApiClient} from '@/api/ApiClient';
 
-    @Component({
-        props: {
-            store: Object,
-        },
-        components: {
-            SendStoreVue,
-        },
-    })
-    export default class SendStore extends Vue {
-        private message = '';
-        private store !: Store;
-        private levelUp = false;
-        private getExp = false;
-        private dialog = false;
-
-        private exp = 0;
+@Component({
+    props: {
+        store: Object,
+    },
+    components: {
+        SendStoreVue,
+    },
+})
+export default class SendStore extends Vue {
 
 
-        get OpenLevelUp() {
-            return this.levelUp && this.getExp === false;
+    get OpenLevelUp() {
+        return this.levelUp && this.getExp === false;
+    }
+    private message = '';
+    private store !: Store;
+    private levelUp = false;
+    private getExp = false;
+    private dialog = false;
+
+    private exp = 0;
+
+    public OnButtonClick() {
+        this.dialog = true;
+    }
+
+    private OnBack() {
+        this.$router.push('/mypage');
+    }
+
+    private OnAddStore() {
+        this.dialog = false;
+        if (!this.$refs.pictureInput.files.length) {
+            return;
         }
+        const file = this.$refs.pictureInput.files[0];
+        const fr = new FileReader();
+        fr.onload = async (evt) => {
+            const result = await new ApiClient()
+                .AddStore(this.store.id, this.$cookies.get('user_token'), evt.target.result, this.message);
+            this.getExp = true;
+            this.exp = result.getExp;
+            this.levelUp = result.levelUp;
 
-        public OnButtonClick() {
-            this.dialog = true;
-        }
+        };
+        fr.readAsDataURL(file);
+    }
 
-        private OnAddStore() {
-            this.dialog = false;
-            if (!this.$refs.pictureInput.files.length) {
-                return;
-            }
-            const file = this.$refs.pictureInput.files[0];
-            const fr = new FileReader();
-            fr.onload = async (evt) => {
-                const result = await new ApiClient()
-                    .AddStore(this.store.id, this.$cookies.get('user_token'), evt.target.result, this.message);
-                this.getExp = true;
-                this.exp = result.getExp;
-                this.levelUp = result.levelUp;
-
-            };
-            fr.readAsDataURL(file);
-        }
-
-        private OnExp() {
-            if (this.OpenLevelUp === false) {
-                this.$router.push('/stores');
-            }
-        }
-
-
-        private OnLevelUp() {
+    private OnExp() {
+        if (this.OpenLevelUp === false) {
             this.$router.push('/stores');
         }
     }
+
+
+    private OnLevelUp() {
+        this.$router.push('/stores');
+    }
+}
 </script>
 
 <style scoped>
